@@ -1,0 +1,16 @@
+.error-page{
+    .no-internet{
+        horizontalAlignment:center;
+        Image{
+            height: 100;
+            margin: 20;
+        }
+        Label{
+            text-align: center;
+            font-size: 25;
+        }
+        Button{
+            font-size: 15;
+        }
+    }
+}

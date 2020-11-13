@@ -1,0 +1,126 @@
+@import "~@nativescript/theme/core";
+// @import "~@nativescript/theme/blue";
+
+@import "styles/abstracts/variables";
+@import "styles/components/button";
+@import "styles/components/errorpage";
+@import "styles/components/item";
+
+
+
+
+
+// Place any CSS rules you want to apply on both iOS and Android here.
+// This is where the vast majority of your CSS code goes.
+
+// Font icon class
+.fab {
+    font-family: "Font Awesome 5 Brands", "fa-brands-400";
+    font-weight: 400;
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 900;
+}
+
+.far {
+    font-family: "Font Awesome 5 Free", "fa-regular-400";
+    font-weight: 400;
+}
+
+// Common page class
+
+.nt-drawer__content{
+    color:white;
+    background-color: black;
+}
+
+.page__content {
+    background-color: var(--black);
+    &-icon,
+    &-placeholder {
+        color: white;
+        font-size: 30;
+        vertical-align: center;
+        horizontal-align: center;
+    }
+
+    &-icon {
+        font-size: 72;
+        vertical-align: top;
+        margin-top: 20%;
+    }
+}
+.nt-drawer__header > * {
+    margin:5;
+}
+
+.nt-drawer__header{
+    background-color: var(--black);
+    .btn{
+        background-color: white;
+        width:150;
+    }
+}
+// Drawer navigation custom styles
+.nt-drawer__header-image {
+    color: const(grey);
+}
+
+.nt-drawer__body{
+    Label{
+        font-size: 20;
+        &.nt-icon{
+            font-size: 20;
+        }
+    }
+    .side-image{
+        justify-content: center;
+        align-items: center;
+        width: 50;
+        
+    }
+}
+
+
+.top-indication{
+    border-radius: 0 0 20 20;
+    padding: 0 20 20 20;
+    //background-image: url("https://wallpaperaccess.com/full/1249019.jpg");
+    background-color: black;
+    // margin:0 -30 0 0;
+}
+
+.buyButton{
+    background: $yellow;
+    color: black;
+}
+
+.sub-heading{
+    text-align: left;
+    font-size: 18;
+    font-weight: 600;
+    color: var(--header-color);
+    margin:10 0 0 10
+}
+
+.heading{
+    text-align: left;
+    font-size: 25;
+    font-weight: 900;
+    color: var(--header-color);
+}
+
+.text{
+    text-wrap:true;
+}
+
+ActionBar{
+    background-color: black;
+    color:white;
+}
+
+.error-page{
+    background-color: white;
+}

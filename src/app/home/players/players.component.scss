@@ -1,0 +1,45 @@
+// @import "~/themes/colors";
+
+$blue : blue;
+.playerCard{
+    background-color: $blue;
+    border-radius: 10;
+    padding: 10;
+
+
+    .playerNumber{
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'Poppins', 'Poppins-Black';
+        font-weight: bold;
+        font-size: 70;
+        padding: -20 auto -40 auto;
+
+    }
+
+    .surname{
+        font-family: 'Poppins-ExtraBold','Poppins ExtraBold';
+        font-weight: bold;
+    }
+
+    .playerName{
+        color: white;
+        font-size: 20;
+        font-weight: bold;
+    }
+}
+
+.position{
+    color: black;
+    padding: 20 0 10 20;
+    font-size: 20;
+    font-weight: bold;
+
+    .surname{
+        font-family: 'Poppins-ExtraBold','Poppins ExtraBold';
+        font-weight: bold;
+    }
+}
+
+
+
+

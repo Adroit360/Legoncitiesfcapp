@@ -1,0 +1,81 @@
+<GridLayout style="background-color: black" rows="auto,*">
+  <StackLayout class="top-indication"> </StackLayout>
+
+  <!-- <ScrollView > -->
+  <GridLayout row="1">
+    <!-- <Button (tap)="uploadInitial()" text='uploadInitial'></Button> -->
+
+    <RadListView
+      row="1"
+      col="1"
+      (itemTap)="newsTapped($event)"
+      class="link-container box"
+      [items]="news"
+    >
+      <ListViewLinearLayout tkListViewLayout></ListViewLinearLayout>
+      <ng-template tkListItemTemplate let-i="index" let-item="item">
+        <GridLayout rows="200,auto">
+          <Image
+            backgroundColor="black"
+            stretch="aspectFill"
+            rowSpan="2"
+            [src]="item.image"
+          ></Image>
+          <StackLayout
+            backgroundColor="transparent"
+            row="1"
+            col="1"
+            class="card-information"
+          >
+            <FlexboxLayout backgroundColor="transparent">
+              <Label style="margin: 2" class="info-tag" text="News"></Label>
+              <Label
+                style="margin: 2"
+                class="info-time"
+                [text]="item.date"
+              ></Label>
+            </FlexboxLayout>
+            <Label
+              style="margin: 2; font-weight: bold; font-size: 18"
+              [text]="item.headline"
+            ></Label>
+          </StackLayout>
+        </GridLayout>
+      </ng-template>
+    </RadListView>
+  </GridLayout>
+
+  <ScrollView backgroundColor="black" *ngIf="tappedNewsIndex != undef" row="1">
+    <GridLayout  rows="auto,*" columns="30,*,30">
+        <Image colSpan="3" [src]="news[tappedNewsIndex].image"></Image>
+        <FlexboxLayout colSpan="2">
+            <Label (tap)="goBack()" margin="10" backgroundColor="white" padding="12" borderRadius="50%" width="50" height="50" fontSize="30" class="fas" text="&#xf060;"></Label>
+        </FlexboxLayout>
+      <StackLayout col="1" row="1">
+        <Label
+          color="white"
+          fontSize="25"
+          fontWeight="bold"
+          textWrap="true"
+          [text]="news[tappedNewsIndex].headline"
+          class="surname"
+        ></Label>
+        <Label
+          color="white"
+          fontSize="20"
+          class="date"
+          [text]="news[tappedNewsIndex].date | date"
+        ></Label>
+        <Label
+          color="white"
+          fontSize="16"
+          textWrap="true"
+          text="Article"
+          class="article"
+          [text]="news[tappedNewsIndex].content"
+        ></Label>
+      </StackLayout>
+    </GridLayout>
+  </ScrollView>
+  <!-- </ScrollView> -->
+</GridLayout>

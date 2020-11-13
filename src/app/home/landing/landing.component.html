@@ -1,0 +1,102 @@
+<GridLayout rows="auto,*">
+  <StackLayout class="top-indication">
+    <!-- <Label style="color:white;font-size: 20;font-weight: bold;text-align: center;" text="Home"></Label> -->
+    <GridLayout columns="20,*,20" rows="auto,auto,auto">
+      <StackLayout class="cardInformation" row="0" col="1">
+        <Label class="league" text="UP Next"></Label>
+        <!-- <Label class="group" text="Group Stages 0 Accra Sports Stadium"></Label> -->
+        <Label class="date" *ngIf="upcomingFixtures[0]" [text]="upcomingFixtures[0].date |date:'medium'"></Label>
+      </StackLayout>
+      <FlexboxLayout alignItems="center" *ngIf="upcomingFixtures.length > 0 && indexedTeams" col="1" row="1" justifyContent="space-between">
+        <Image
+          [src]="indexedTeams[upcomingFixtures[0].homeTeam].logoUrl"
+          width="30%"
+        ></Image>
+        <StackLayout class="scoreCard" width="35%">
+          <!-- <Label class="match-time-label" text="Kick Off(GMT)"></Label> -->
+          <Label class="match-time" [text]="upcomingFixtures[0].homeScore + '  -  ' + upcomingFixtures[0].awayScore"></Label>
+        </StackLayout>
+        <Image
+          [src]="indexedTeams[upcomingFixtures[0].awayTeam].logoUrl"
+          width="30%"
+        ></Image>
+      </FlexboxLayout>
+      <Button (tap)="buyTickets()" row="2" col="1" class="buyButton" width="100%">
+        <FormattedString>
+          <Span text=" Buy  "></Span>
+          <Span text="Tickets" fontWeight="bold"></Span>
+        </FormattedString>
+      </Button>
+    </GridLayout>
+  </StackLayout>
+
+  <ScrollView row="1">
+    <StackLayout>
+      <Label row="1" padding="20 0 0 20">
+        <FormattedString>
+          <Span fontWeight="bold" text=" Upcoming "></Span>
+          <Span fontWeight="bold" text="Matches" class="surname"></Span>
+        </FormattedString>
+      </Label>
+    
+      <!-- <ListView row="2" *ngIf="indexedTeams" [items]="upcomingFixtures"> -->
+        <!-- <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even"> -->
+          <GridLayout style="margin: 10;" *ngFor="let item of upcomingFixtures" columns="20,*,20" rows="auto, auto">
+            <FlexboxLayout col="1" justifyContent="space-between">
+              <Image [src]="indexedTeams[item.homeTeam].logoUrl" width="20%"></Image>
+              <StackLayout class="scoreCard" width="60%">
+                <!-- <Label [text]="indexedTeams[item.homeTeam].name  + indexedTeams[item.awayTeam].name"></Label> -->
+                <Label class="min-title title" *ngIf="indexedTeams" [text]="indexedTeams[item.homeTeam].name + ' vs ' + indexedTeams[item.awayTeam].name"></Label>
+                <Label class="date" [text]="item.date |date:'fullDate'"></Label>
+                <Label class="min-title time" [text]="item.date |date:'shortTime'"></Label>
+                <!-- <Button (tap)="buyTickets()" row="1" class="buyButton" width="100%">
+                  <FormattedString>
+                    <Span text=" Buy  "></Span>
+                    <Span text="Tickets" fontWeight="bold"></Span>
+                  </FormattedString>
+                </Button> -->
+              </StackLayout>
+              <Image [src]="indexedTeams[item.awayTeam].logoUrl" width="20%"></Image>
+            </FlexboxLayout>
+          </GridLayout>
+        <!-- </ng-template> -->
+      <!-- </ListView> -->
+    
+    
+      <Label *ngIf="oldfixtures.length > 0" row="1" padding="20 0 0 20">
+        <FormattedString>
+          <Span text=" Upcoming "></Span>
+          <Span text="Matches" class="surname"></Span>
+        </FormattedString>
+      </Label>
+    
+      <!-- <ListView row="2" *ngIf="indexedTeams" [items]="upcomingFixtures"> -->
+        <!-- <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even"> -->
+            <FlexboxLayout style="margin: 10;" *ngFor="let item of oldfixtures" width="97%" class="matches" >
+              <!-- <Image src="https://upload.wikimedia.org/wikipedia/en/f/fd/Asante_Kotoko_SC_%28logo%29.png" width="20%"></Image> -->
+              <Label class="team" width="30%" [text]="indexedTeams[item.homeTeam].name"></Label>
+              <Image [src]="indexedTeams[item.homeTeam].logoUrl" width="10%"></Image>
+              <Label width="20%" margin="auto 10" class="scoree" [text]="item.awayScore + '-' + item.awayScore"></Label>
+              <Image [src]="indexedTeams[item.awayTeam].logoUrl" width="10%"></Image>
+              <Label class="team" width="30%" [text]="indexedTeams[item.awayTeam].name"></Label>
+          </FlexboxLayout>
+        <!-- </ng-template> -->
+      <!-- </ListView> -->
+    
+    </StackLayout>
+    
+  </ScrollView>
+
+
+
+    <!--
+        <FlexboxLayout col="1" justifyContent="space-between">
+            <Image src="https://www.sportsbase.io/images/clubs/17155.png" width="20%"></Image>
+            <StackLayout class="scoreCard" width="60%">
+                <Label class="min-title" text="GHANA PREMIERE LEAGUE"></Label>
+                <Label class="max-title" text="TUE, 20 OCT"></Label>
+                <Label class="min-title" text="19:00"></Label>
+            </StackLayout>
+            <Image src="https://upload.wikimedia.org/wikipedia/en/b/b1/Legon_Cities_FC.png" width="20%"></Image>
+        </FlexboxLayout> -->
+</GridLayout>

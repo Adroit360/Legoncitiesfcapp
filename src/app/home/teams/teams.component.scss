@@ -1,0 +1,39 @@
+// @import "~/themes/colors";
+$blue:blue;
+.scoree{
+    color: white;
+
+    font-weight: bold;
+    background-color: $blue;
+    padding: 10;
+    vertical-align: middle;
+    border-radius: 10;
+    text-align: center;
+}
+
+.team{
+    // font-family: 'Poppins','Poppins-Bold';
+    font-weight:600;
+    padding: 10 auto;
+    text-align: center;
+}
+
+.matches{
+    border-width: 1;
+    border-color: rgba(0, 0, 0, 0.103);
+    border-radius: 10;
+    padding: 20 auto;
+    margin: 10 auto;
+}
+
+.matchDate{
+font-weight: bold;
+font-family: 'Poppins','Poppins-ExtraBold','Poppins ExtraBold';
+color: white;
+}
+
+.match-time-label{
+    padding: 10 auto;
+    color: rgba(0, 0, 0, 0.5);
+}
+

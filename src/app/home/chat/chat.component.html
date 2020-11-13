@@ -1,0 +1,56 @@
+<GridLayout class="body" rows="auto,*,auto">
+  <!-- Chat preview -->
+  <StackLayout colSpan="3" class="top-indication"> </StackLayout>
+  <!-- <ScrollView row="1" col="1"> -->
+    <GridLayout row="1" col="1" class="chats">
+      <RadListView #listView [items]="chatMessages">
+        <ListViewLinearLayout tkListViewLayout></ListViewLinearLayout>
+        <ng-template tkListItemTemplate let-i="index" let-item="item">
+          <GridLayout columns="auto,*" rows="auto" class="comment">
+            <Image
+              stretch="fill"
+              [src]="item.photoURL"
+              class="pic"
+              text=""
+            ></Image>
+            <StackLayout col="3" class="chat">
+              <FlexboxLayout justifyContent="space-between" alignItems="center">
+                <Label class="name" [text]="item.name"></Label>
+                <Label class="name" [text]="item.dateTime"></Label>
+              </FlexboxLayout>
+
+              <Label class="msg" textWrap="true" [text]="item.text"></Label>
+            </StackLayout>
+          </GridLayout>
+        </ng-template>
+      </RadListView>
+      <!-- End -->
+    </GridLayout>
+  <!-- </ScrollView> -->
+  <!-- Chat -->
+  <FlexboxLayout *ngIf="firebaseService.currentUser" col="1" row="2">
+    <TextField
+      #chatTextBox
+      [(ngModel)]="chatText"
+      width="70%"
+      hint="Enter text"
+    ></TextField>
+    <Button (tap)="sendText()" class="buyButton" text="Send"></Button>
+  </FlexboxLayout>
+
+  <Label
+    *ngIf="!firebaseService.currentUser"
+    nsRouterLink="/login"
+    colSpan="3"
+    row="2"
+    style="
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 18;
+      background-color: white;
+      padding: 10;
+    "
+    margin="10"
+    text="Please Login to Chat"
+  ></Label>
+</GridLayout>

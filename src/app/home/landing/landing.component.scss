@@ -1,0 +1,115 @@
+// @import "~/themes/colors";
+$blue:blue;
+$yellow:yellow;
+.scoreCard{
+    text-align: center;
+    padding-top: 10;
+
+    .min-title{
+        font-family: "Poppins","Poppins-Bold","Poppins Bold";
+        font-size: small;
+        font-weight: bold;
+        color:$blue;
+    }
+
+    .max-title{
+        font-family: "Poppins", "Poppins-Bold","Poppins Bold";
+        font-weight: bold;
+        font-size: 20;
+        padding: -5 auto;
+    }
+
+    .date{
+        
+    }
+
+    .header-max-title{
+        color: white;
+    }
+
+    .match-time-label{
+        font-size: small;
+        color: white;
+        font-weight: bold;
+        padding: -5 auto;
+
+    }
+
+    .match-time{
+        color: white;
+        font-size: 30;
+        font-weight: bold;
+        font-family: 'Poppins', 'Poppins-ExtraBold','Poppins ExtraBold';
+        // padding: -5 auto;
+        margin-bottom: 0;
+
+
+    }
+}
+    .buyButton{
+        background: $yellow;
+        color: black;
+    }
+
+
+    .cardInformation{
+        color: white;
+        text-align: center;
+
+        .league{
+            color: white;
+            font-weight: bold;
+            font-family: 'Poppins','Poppins-ExtraBold','Poppins ExtraBold';
+            padding-bottom: 15;
+        }
+
+        .group{
+            color: rgba(255, 255, 255, 0.5);
+            padding: -5 auto;
+        }
+
+        .date{
+            color: white;
+            font-weight: bold;
+            font-family: 'Poppins','Poppins-ExtraBold','Poppins ExtraBold';
+            padding-bottom: 15;
+            font-size: small;
+        }
+    }
+
+    .scoree{
+        color: white;
+    
+        font-weight: bold;
+        background-color: $blue;
+        padding: 10;
+        vertical-align: middle;
+        border-radius: 10;
+        text-align: center;
+    }
+    
+    .team{
+        // font-family: 'Poppins','Poppins-Bold';
+        font-weight:600;
+        padding: 10 auto;
+        text-align: center;
+    }
+    
+    .matches{
+        border-width: 1;
+        border-color: rgba(0, 0, 0, 0.103);
+        border-radius: 10;
+        padding: 20 auto;
+        margin: 10 auto;
+    }
+    
+    .matchDate{
+    font-weight: bold;
+    font-family: 'Poppins','Poppins-ExtraBold','Poppins ExtraBold';
+    color: white;
+    }
+    
+    .match-time-label{
+        padding: 10 auto;
+        color: rgba(0, 0, 0, 0.5);
+    }

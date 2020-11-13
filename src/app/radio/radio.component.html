@@ -1,0 +1,22 @@
+<ActionBar title="Legoncities Radio"></ActionBar>
+<GridLayout>
+  <WebViewExt
+    #webview
+    src="https://radio.modernghana.com/station/legoncitiesradio"
+    (loadStarted)="onLoadStarted($event)"
+    (loadFinished)="onLoadFinished($event)"
+  >
+  </WebViewExt>
+  <GridLayout backgroundColor="black" *ngIf="isLoading"></GridLayout>
+  <GridLayout rows="*,auto,*" rowSpan="3" class="error-page" *ngIf="hasError">
+    <!-- <Image rowSpan="3" src="res://player" stretch="aspectFill"></Image> -->
+    <StackLayout class="no-internet" row="1">
+      <Image  src="~/assets/logo.png"></Image>
+      <Label text="Please check your internet"></Label>
+      <Button class="action-btn" (tap)="reload()" text="reload"></Button>
+    </StackLayout>
+  </GridLayout>
+  <ActivityIndicator borderRadius="50%" backgroundColor="white" *ngIf="isLoading" row="2" rowSpan="3" color="black"
+  width="100" height="100" [busy]="true">
+</ActivityIndicator>
+></GridLayout>

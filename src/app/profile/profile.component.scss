@@ -1,0 +1,49 @@
+// @import "~/themes/colors";
+$yellow:yellow;
+.main{
+    color: white;
+    font-family: 'Poppins','Poppins-ExtraBold';
+    // font-size: large;
+    font-weight: bold;
+    placeholder-color: white;
+}
+
+
+TextField{
+    font-size: large;
+    placeholder-color: rgba(0, 0, 0, 0.3)
+}
+
+.name{
+    color: white;
+    placeholder-color: rgba(255, 255, 255, 0.5);
+}
+
+.support{
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.fields{
+    margin-bottom: 20;
+}
+
+.icon{
+    background-color: $yellow;
+    border-radius: 50%;
+    padding: 10;
+}
+
+.profile-grid{
+    
+    width: 100;
+    // height: 130;
+    padding:0;
+    .image{
+        height: 100;
+        width:100;
+        border-radius: 50%;
+    }
+    .plus{
+
+    }
+}

@@ -1,0 +1,60 @@
+<!--
+RadSideDrawer is a UI component part of the Progress NativeScript UI set of components.
+Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
+https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawer/getting-started
+-->
+<RadSideDrawer [drawerTransition]="sideDrawerTransition">
+    <GridLayout style="background-color: black;" tkDrawerContent rows="auto, *" class="nt-drawer__content">
+        <StackLayout style="background-color: transparent;" row="0" class="nt-drawer__header">
+            <Image *ngIf="!firebaseService.currentUser" stretch="fill" class="nt-drawer__header-image fas t-36" src="~/assets/account.png"></Image>
+            <Image *ngIf="firebaseService.currentUser" stretch="fill" class="nt-drawer__header-image fas t-36" [src]="firebaseService.currentUser.photoURL"></Image>
+            <Label *ngIf="firebaseService.currentUser" class="nt-drawer__header-brand" [text]="firebaseService.currentUser.displayName"></Label>
+            <Label *ngIf="firebaseService.currentUser" class="nt-drawer__header-footnote" [text]="firebaseService.currentUser.email"></Label>
+            <Button *ngIf="firebaseService.currentUser" (tap)="onNavItemTap('/profile')" class="btn btn--rounded" text="Profile"></Button>
+        </StackLayout>
+    
+        <GridLayout rows="*,auto,*,auto" row="1" class="nt-drawer__body">
+            <ScrollView row="0">
+                <StackLayout>
+                    <!-- <GridLayout columns="auto, *" class="nt-drawer__list-item" [class.-selected]="isComponentSelected('/home')" (tap)="onNavItemTap('/home')">
+                        <Label col="0" text="&#xf015;" class="nt-icon fas"></Label>
+                        <Label style="margin-left: 20;" col="1" text="Home" ></Label>
+                    </GridLayout> -->
+    
+                    <GridLayout columns="auto, *" class="nt-drawer__list-item" [class.-selected]="isComponentSelected('/leaguetable')" (tap)="onNavItemTap('/leaguetable')">
+                        <Label col="0" text="&#xf0ce;" class="nt-icon far"></Label>
+                        <Label col="1" style="margin-left: 20;" text="Leaugue Table" class="p-r-10"></Label>
+                    </GridLayout>
+    
+                    <GridLayout columns="auto, *" class="nt-drawer__list-item" [class.-selected]="isComponentSelected('/theclub')" (tap)="onNavItemTap('/theclub')">
+                        <Label col="0" text="&#xf1e3;" class="nt-icon fas"></Label>
+                        <Label col="1" style="margin-left: 20;" text="The Club" class="p-r-10"></Label>
+                    </GridLayout>
+    
+                    <GridLayout columns="auto, *" class="nt-drawer__list-item" [class.-selected]="isComponentSelected('/contact')" (tap)="onNavItemTap('/contact')">
+                        <Label col="0" text="&#xf2bb;" class="nt-icon fas"></Label>
+                        <Label col="1" style="margin-left: 20;" text="Contact" class="p-r-10"></Label>
+                    </GridLayout>
+        
+                    <StackLayout style="background-color: white;color:white;height: 2; width:90%;" class="hr"></StackLayout>
+    
+                    <GridLayout *ngIf="firebaseService.currentUser" columns="auto, *" class="nt-drawer__list-item" (tap)="signOut()">
+                        <Label col="0" text="&#xf2f5;" class="nt-icon fas"></Label>
+                        <Label col="1" style="margin-left: 20;" text="Logout" class="p-r-10"></Label>
+                    </GridLayout> 
+
+                    <GridLayout *ngIf="!firebaseService.currentUser" columns="auto, *" class="nt-drawer__list-item" [class.-selected]="isComponentSelected('/login')" (tap)="onNavItemTap('/login')">
+                        <Label col="0" text="&#xf2f6;" class="nt-icon fas"></Label>
+                        <Label col="1" style="margin-left: 20;" text="Login" class="p-r-10"></Label>
+                    </GridLayout>
+
+                </StackLayout>
+            </ScrollView>
+            <FlexboxLayout row="3" class="side-image">
+                <Image src="~/assets/logo.png"></Image>
+            </FlexboxLayout>
+        </GridLayout>
+    </GridLayout>
+
+    <page-router-outlet tkMainContent></page-router-outlet>
+</RadSideDrawer>

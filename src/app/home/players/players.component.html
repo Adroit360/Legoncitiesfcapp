@@ -1,0 +1,25 @@
+<GridLayout rows="auto,*">
+  <StackLayout class="top-indication">
+   
+  </StackLayout>
+  <ScrollView *ngIf="indexedPlayers" row="1">
+    <StackLayout>
+      <StackLayout *ngFor="let key of objectKeys(indexedPlayers)">
+        <Label [text]="key + 's'" col="1" class="position">
+        </Label>
+  
+        <GridLayout *ngFor="let player of indexedPlayers[key]" columns="*,auto" margin="0 20 20 20" rows="50,120">
+          <StackLayout class="playerCard" row="1" col="0" colSpan="2">
+            <Label  class="playerNumber" [text]="player.number"></Label>
+            <Label  [text]="player.name" class="playerName">
+            </Label>
+          </StackLayout>
+          <Image [src]="player.image" col="1" row="0" rowSpan="2"></Image>
+        </GridLayout>
+  
+        
+      </StackLayout>
+    </StackLayout>
+    
+  </ScrollView>
+</GridLayout>

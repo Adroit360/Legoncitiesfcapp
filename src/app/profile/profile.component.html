@@ -1,0 +1,57 @@
+
+<ScrollView>
+    <StackLayout>
+        <GridLayout rows="150" class="top-indication">
+            <FlexboxLayout alignItems="center" justifyContent="center">
+                <GridLayout class="profile-grid" rows="*,*" columns="*,*">
+                    <Image stretch="aspectFill"  class="image" *ngIf="firebaseService.currentUser" #profileImage colSpan="2" rowSpan="2" [src]="imageSrc" ></Image>
+                    <Image class="plus" *ngIf="firebaseService.currentUser && isEditMode" (tap)="onSelectSingleTap()" row="1" col="1" src="~/assets/plus.png" ></Image>
+                </GridLayout>
+        
+                <!-- <StackLayout width="60%" verticalAlignment="center">
+                    <GridLayout rows="auto,auto">
+                        <TextField class="main" hint="Nana Kweku"></TextField>
+                        <FlexboxLayout row="1">
+                            <Label width="auto" class="support" text="Jersey Number"></Label>
+                            <TextField width="30%" class="main" hint="00" ></TextField>
+                        </FlexboxLayout>
+                    </GridLayout>
+                </StackLayout> -->
+            </FlexboxLayout>
+        </GridLayout>
+        <GridLayout rows="auto,*">
+            <Label style="font-size: 15;font-weight: bold;" *ngIf="!isEditMode" text="View Profile" padding="20">
+            </Label>
+
+            <Label style="font-size: 15;font-weight: bold;" *ngIf="isEditMode" text="Edit Profile" padding="20">
+            </Label>
+            <StackLayout *ngIf="localUser" padding="20" row="1">
+                <TextField *ngIf="isEditMode" [(ngModel)]="localUser.displayName" class="fields" hint="Name"></TextField>
+                <FlexboxLayout *ngIf="!isEditMode" class="info item">
+                    <Label fontWeight="bold" text="Name"></Label>
+                    <Label text="  "></Label>
+                    <Label [text]="localUser.displayName"></Label>
+                </FlexboxLayout>
+                <TextField *ngIf="isEditMode" [(ngModel)]="localUser.email" class="fields" hint="Email"></TextField>
+                <FlexboxLayout *ngIf="!isEditMode" class="info item">
+                    <Label fontWeight="bold" text="Email"></Label>
+                    <Label text="  "></Label>
+                    <Label [text]="localUser.email"></Label>
+                </FlexboxLayout>
+                <!-- <TextField class="fields" hint="Email"></TextField> -->
+                <TextField *ngIf="isEditMode" [(ngModel)]="localUser.phoneNumber" class="fields" hint="Phone number"></TextField>
+                <FlexboxLayout *ngIf="!isEditMode" class="info item">
+                    <Label fontWeight="bold" text="Phone Number"></Label>
+                    <Label text="  "></Label>
+                    <Label [text]="localUser.phoneNumber"></Label>
+                </FlexboxLayout>
+                <Button *ngIf="isEditMode" class="buyButton" (tap)="edit()" text="Update Profile"></Button>
+                <Button (tap)="switchToEditMode()" *ngIf="!isEditMode" text="Edit"></Button>
+            </StackLayout>
+            <ActivityIndicator borderRadius="50%" backgroundColor="white" *ngIf="isLoading" row="2" rowSpan="3" color="black"
+            width="100" height="100" [busy]="true">
+          </ActivityIndicator>
+        </GridLayout>
+    </StackLayout>
+    </ScrollView>
+    

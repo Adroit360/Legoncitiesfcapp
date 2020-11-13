@@ -1,0 +1,42 @@
+<ActionBar (loaded)="onActionBarLoaded($event)" color="white" backgroundColor="black"  flat="true">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://form" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://form" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+
+    <ActionItem icon="res://radio" ios.position="right" nsRouterLink="/radio">
+        <!-- <AbsoluteLayout class="badge-icon">
+            <Label class="fas icon" text="&#xf0f3;"></Label>
+            <Label class="badge" text="2"></Label>
+        </AbsoluteLayout> -->
+    </ActionItem>
+
+    <Label text=""></Label>
+</ActionBar>
+<!-- , iconSource: 'res://icon' -->
+<TabView androidTabsPosition="bottom" (loaded)="onLoaded($event)" class="main-tab-view" selectedIndex="0" >
+    <StackLayout *tabItem="{title: 'Home',iconSource:'res://homehome'}">
+        <router-outlet name="landing"></router-outlet>
+    </StackLayout>
+    <StackLayout *tabItem="{title: 'Live',iconSource:'res://futbolsolid'}">
+        <router-outlet name="fixtures"></router-outlet>
+    </StackLayout>
+    <StackLayout *tabItem="{title: 'Players',iconSource:'res://teams'}">
+        <router-outlet name="players"></router-outlet>
+    </StackLayout>
+    <StackLayout *tabItem="{title: 'News',iconSource:'res://newspapernews'}">
+        <router-outlet name="news"></router-outlet>
+    </StackLayout>
+    <StackLayout *tabItem="{title: 'chat',iconSource:'res://userme'}">
+        <router-outlet name="chat"></router-outlet>
+    </StackLayout>
+</TabView>

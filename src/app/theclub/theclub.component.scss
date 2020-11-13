@@ -1,0 +1,41 @@
+.theclub{
+    background-color: var(--global-background);
+    &__top{
+        flex-direction: column;
+        align-items: center;
+    }
+    &__logo{
+        margin:15;
+        height: 150;
+        Image{
+            height: inherit;
+        }
+    }
+
+    
+
+    .info-box{
+        width:100%;
+        padding:10;
+        .info{
+            
+            Label{
+                font-family: 'Poppins', 'Poppins-Black';
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .more-info{
+        align-self: flex-start;
+        .heading{
+            margin:10 20;
+        }
+    
+        .text{
+            margin:10 20;
+            font-size: 18;
+            // text-align: justify;
+        }
+    }
+}

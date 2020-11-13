@@ -1,0 +1,43 @@
+<ActionBar title="Sign Up"></ActionBar>
+<ScrollView>
+<StackLayout>
+    <GridLayout rows="150" class="top-indication">
+        <FlexboxLayout alignItems="center" justifyContent="center">
+            <GridLayout class="profile-grid" rows="*,*" columns="*,*">
+                <Image stretch="aspectFill" class="image" #profileImage colSpan="2" rowSpan="2" [src]="imageSrc" ></Image>
+                <Image class="plus" (tap)="onSelectSingleTap()" row="1" col="1" src="~/assets/plus.png" ></Image>
+            </GridLayout>
+    
+            <!-- <StackLayout width="60%" verticalAlignment="center">
+                <GridLayout rows="auto,auto">
+                    <TextField class="main" hint="Nana Kweku"></TextField>
+                    <FlexboxLayout row="1">
+                        <Label width="auto" class="support" text="Jersey Number"></Label>
+                        <TextField width="30%" class="main" hint="00" ></TextField>
+                    </FlexboxLayout>
+                </GridLayout>
+            </StackLayout> -->
+        </FlexboxLayout>
+    </GridLayout>
+    <GridLayout rows="auto,*">
+        <Label padding="20">
+            <FormattedString>
+                <Span text="Signup " class="surname"></Span>
+                <Span text="for an account"></Span>
+            </FormattedString>
+        </Label>
+        <StackLayout padding="20" row="1">
+            <TextField [(ngModel)]="name" class="fields" hint="Name"></TextField>
+            <TextField [(ngModel)]="email" class="fields" hint="Email"></TextField>
+            <!-- <TextField class="fields" hint="Email"></TextField> -->
+            <TextField [(ngModel)]="phoneNumber" class="fields" hint="Phone number"></TextField>
+            <TextField  secure="true" class="fields" [(ngModel)]="password" hint="Password"></TextField>
+            <Button class="buyButton" (tap)="signup()" text="SignUp"></Button>
+            <Button [nsRouterLink]="['/login']" text="Login"></Button>
+        </StackLayout>
+        <ActivityIndicator borderRadius="50%" backgroundColor="white" *ngIf="isLoading" row="2" rowSpan="3" color="black"
+        width="100" height="100" [busy]="true">
+      </ActivityIndicator>
+    </GridLayout>
+</StackLayout>
+</ScrollView>

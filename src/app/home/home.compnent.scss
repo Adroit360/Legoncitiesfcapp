@@ -1,0 +1,77 @@
+@import "~/themes/colors";
+
+.scoreCard{
+    text-align: center;
+    padding-top: 10;
+
+    .min-title{
+        font-family: "Poppins","Poppins-Bold","Poppins Bold";
+        font-size: small;
+        font-weight: bold;
+        color:$blue;
+    }
+
+    .max-title{
+        font-family: "Poppins", "Poppins-Bold","Poppins Bold";
+        font-weight: bold;
+        font-size: 20;
+        padding: -5 auto;
+    }
+
+    .header-max-title{
+        color: white;
+    }
+
+    .match-time-label{
+        font-size: small;
+        color: white;
+        font-weight: bold;
+        padding: -5 auto;
+
+    }
+
+    .match-time{
+        color: white;
+        font-size: 40;
+        font-weight: bold;
+        font-family: 'Poppins', 'Poppins-ExtraBold','Poppins ExtraBold';
+        padding: -5 auto;
+        margin-bottom: 0;
+
+
+    }
+}
+    .buyButton{
+        background: $yellow;
+        color: black;
+    }
+
+
+    .cardInformation{
+        color: white;
+        text-align: center;
+
+        .league{
+            color: white;
+            font-weight: bold;
+            font-family: 'Poppins','Poppins-ExtraBold','Poppins ExtraBold';
+            padding-bottom: 15;
+        }
+
+        .group{
+            color: rgba(255, 255, 255, 0.5);
+            padding: -5 auto;
+        }
+
+        .date{
+            color: white;
+            font-weight: bold;
+            font-family: 'Poppins','Poppins-ExtraBold','Poppins ExtraBold';
+            padding-bottom: 15;
+            font-size: small;
+        }
+    }
+
+    .main-tab-view{
+        margin-top: -30;
+    }
