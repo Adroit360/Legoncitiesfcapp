@@ -2,17 +2,13 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
-import { ActionBar } from "tns-core-modules/ui/action-bar";
-import { EventData, isAndroid, isIOS, Page } from "tns-core-modules/ui/page";
 import * as firebase from "nativescript-plugin-firebase/app";
 import { FirebaseService } from "~/services/firebase.service";
-import { ImageSource } from "tns-core-modules/image-source";
 import { of } from "rxjs";
-import * as fileSystemModule from "tns-core-modules/file-system";
 
 import { MiscService } from "~/services/misc.service";
 import { UniversalService } from "~/services/universal.service";
+import { ActionBar, Application, EventData, isIOS, Page } from "@nativescript/core";
 
 
 @Component({
@@ -64,7 +60,7 @@ export class HomeComponent implements OnInit {
     }
 
     onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
+        const sideDrawer = <RadSideDrawer><any>Application.getRootView();
         sideDrawer.showDrawer();
     }
 

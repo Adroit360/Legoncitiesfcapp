@@ -6,16 +6,8 @@ import {
     ViewChild,
 } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
-import { isAndroid } from "tns-core-modules/ui/page";
-import { WebView } from "tns-core-modules/ui/web-view";
-import {
-    AndroidApplication,
-    AndroidActivityBackPressedEventData,
-} from "tns-core-modules/application";
-import * as connectivity from "tns-core-modules/connectivity";
-import * as application from "tns-core-modules/application";
 import { WebViewExt } from "@nota/nativescript-webview-ext";
+import { Application, Connectivity, isAndroid, WebView } from "@nativescript/core";
 
 @Component({
     selector: "Search",
@@ -48,7 +40,7 @@ export class RadioComponent implements OnInit, OnDestroy {
     }
 
     onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
+        const sideDrawer = <RadSideDrawer><any>Application.getRootView();
         sideDrawer.showDrawer();
     }
 
@@ -259,14 +251,14 @@ export class RadioComponent implements OnInit, OnDestroy {
     }
 
     public checkConnection(): boolean {
-        switch (connectivity.getConnectionType()) {
-            case connectivity.connectionType.none:
+        switch (Connectivity.getConnectionType()) {
+            case Connectivity.connectionType.none:
                 return false;
                 break;
-            case connectivity.connectionType.wifi:
+            case Connectivity.connectionType.wifi:
                 return true;
                 break;
-            case connectivity.connectionType.mobile:
+            case Connectivity.connectionType.mobile:
                 return true;
                 break;
             default:

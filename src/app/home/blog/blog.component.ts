@@ -6,18 +6,10 @@ import {
     ViewChild,
 } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
-import { isAndroid } from "tns-core-modules/ui/page";
-import { WebView } from "tns-core-modules/ui/web-view";
-import {
-    AndroidApplication,
-    AndroidActivityBackPressedEventData,
-} from "tns-core-modules/application";
-import * as connectivity from "tns-core-modules/connectivity";
-import * as application from "tns-core-modules/application";
 import { WebViewExt } from "@nota/nativescript-webview-ext";
 import * as firebase from "nativescript-plugin-firebase/app";
 import { FirebaseService } from "~/services/firebase.service";
+import { Connectivity, AndroidActivityBackPressedEventData, AndroidApplication, Application, isAndroid } from "@nativescript/core";
 
 @Component({
     templateUrl: "./blog.component.html",
@@ -43,7 +35,7 @@ export class BlogComponent {
         global['route'] = "home";
         this._webView = <WebViewExt>this.webView.nativeElement;
         if (isAndroid) {
-            application.android.on(
+            Application.android.on(
                 AndroidApplication.activityBackPressedEvent,
                 (data: AndroidActivityBackPressedEventData) => {
                     if (this.back()) {
@@ -55,7 +47,7 @@ export class BlogComponent {
     }
 
     onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
+        const sideDrawer = <RadSideDrawer><any>Application.getRootView();
         sideDrawer.showDrawer();
     }
 
@@ -135,14 +127,14 @@ export class BlogComponent {
     // }
 
     public checkConnection(): boolean {
-        switch (connectivity.getConnectionType()) {
-            case connectivity.connectionType.none:
+        switch (Connectivity.getConnectionType()) {
+            case Connectivity.connectionType.none:
                 return false;
                 break;
-            case connectivity.connectionType.wifi:
+            case Connectivity.connectionType.wifi:
                 return true;
                 break;
-            case connectivity.connectionType.mobile:
+            case Connectivity.connectionType.mobile:
                 return true;
                 break;
             default:

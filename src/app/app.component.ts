@@ -4,8 +4,6 @@ import { Application, Page } from "@nativescript/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
-// import * as app from "tns-core-modules/application";
-// import { Page } from "tns-core-modules/ui/page";
 import { FirebaseService } from "~/services/firebase.service";
 
 @Component({

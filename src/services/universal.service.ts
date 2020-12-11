@@ -3,17 +3,11 @@ import { Injectable, ViewContainerRef } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import * as permissions from "nativescript-permissions";
 import * as TNSPhone from 'nativescript-phone';
-import { isAndroid } from "tns-core-modules/ui/page";
-declare var android;
-import {
-    AndroidApplication,
-    AndroidActivityBackPressedEventData,
-} from "tns-core-modules/application";
-import * as application from "tns-core-modules/application";
 import { exit } from "nativescript-exit";
 import { Router } from "@angular/router";
 import { MiscService } from "./misc.service";
-import { TabView } from "tns-core-modules/ui/tab-view";
+import { AndroidActivityBackPressedEventData, AndroidApplication, Application, isAndroid, TabView } from "@nativescript/core";
+
 
 @Injectable()
 export class UniversalService{
@@ -84,7 +78,7 @@ export class UniversalService{
 
     registerBackPressedListener(){
         if (isAndroid) {
-            application.android.on(
+            Application.android.on(
                 AndroidApplication.activityBackPressedEvent,
                 (data: AndroidActivityBackPressedEventData) => {
                     if (this.router.isActive("/home", false)) {

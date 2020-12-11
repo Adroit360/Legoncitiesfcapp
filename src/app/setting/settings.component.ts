@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Application } from "@nativescript/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
 
 @Component({
     selector: "Settings",
@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
     }
 
     onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
+        const sideDrawer = <RadSideDrawer><any>Application.getRootView();
         sideDrawer.showDrawer();
     }
 }

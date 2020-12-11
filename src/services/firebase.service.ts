@@ -2,14 +2,11 @@ import { User } from "nativescript-plugin-firebase";
 import * as firebaseCore from "nativescript-plugin-firebase";
 import * as firebase from "nativescript-plugin-firebase/app";
 import { auth } from "nativescript-plugin-firebase/app/auth";
-import * as appStorage from "tns-core-modules/application-settings";
-import { Observable } from "rxjs";
-import * as fs from "tns-core-modules/file-system";
-import { ImageSource } from "tns-core-modules/image-source";
+
 import { MiscService } from "./misc.service";
 import { LocalUser } from "~/models/user";
 import { OnInit } from "@angular/core";
-import * as application from "tns-core-modules/application";
+import { path, ApplicationSettings, ImageSource, knownFolders } from "@nativescript/core";
 
 export class FirebaseService implements OnInit {
     currentUser?: LocalUser;
@@ -33,7 +30,7 @@ export class FirebaseService implements OnInit {
 
         try {
             let cred: { email; password } = JSON.parse(
-                appStorage.getString(this.storageKeys.credentials)
+                ApplicationSettings.getString(this.storageKeys.credentials)
             );
 
             if (cred) {
@@ -57,7 +54,7 @@ export class FirebaseService implements OnInit {
                         .then((doc) => {
                             console.log(doc.data());
                             this.currentUser = doc.data();
-                            appStorage.setString(
+                            ApplicationSettings.setString(
                                 this.storageKeys.currrentUser,
                                 JSON.stringify(this.currentUser)
                             );
@@ -65,7 +62,7 @@ export class FirebaseService implements OnInit {
                         .catch(this.checkIfLoggedIn);
                 } else {
                     this.currentUser = null;
-                    appStorage.remove(this.storageKeys.currrentUser);
+                    ApplicationSettings.remove(this.storageKeys.currrentUser);
                 }
             },
             (error) => this.checkIfLoggedIn()
@@ -73,7 +70,7 @@ export class FirebaseService implements OnInit {
     }
 
     checkIfLoggedIn() {
-        let userString = appStorage.getString(this.storageKeys.currrentUser);
+        let userString = ApplicationSettings.getString(this.storageKeys.currrentUser);
         if (userString) {
             this.currentUser = JSON.parse(userString);
         } else {
@@ -121,10 +118,10 @@ export class FirebaseService implements OnInit {
             return childRef.put(imagePath, metadata);
         }
 
-        let folder = fs.knownFolders.documents();
-        var path = fs.path.join(folder.path, `${imageName}.jpg`);
-        var saved = data.saveToFile(path, "jpg");
-        return childRef.put(path);
+        let folder = knownFolders.documents();
+        var _path = path.join(folder.path, `${imageName}.jpg`);
+        var saved = data.saveToFile(_path, "jpg");
+        return childRef.put(_path);
     }
 
     uploadFile(filePath: string, fileName: string) {
@@ -136,7 +133,7 @@ export class FirebaseService implements OnInit {
     }
 
     signIn(email, password) {
-        appStorage.setString(
+        ApplicationSettings.setString(
             this.storageKeys.credentials,
             JSON.stringify({ email, password })
         );
@@ -145,8 +142,8 @@ export class FirebaseService implements OnInit {
 
     signOut() {
         firebase.auth().signOut();
-        appStorage.remove(this.storageKeys.currrentUser);
-        appStorage.remove(this.storageKeys.credentials);
+        ApplicationSettings.remove(this.storageKeys.currrentUser);
+        ApplicationSettings.remove(this.storageKeys.credentials);
     }
 
    

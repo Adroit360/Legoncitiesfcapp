@@ -3,7 +3,7 @@ import { NewsItem, NewsService } from "./news.service";
 import * as firebase from "nativescript-plugin-firebase/app";
 import { FirebaseService } from "~/services/firebase.service";
 import { News } from "~/models/news";
-import { Page } from "tns-core-modules/ui/page";
+import { Page } from "@nativescript/core";
 
 @Component({
     templateUrl: "./news.component.html",

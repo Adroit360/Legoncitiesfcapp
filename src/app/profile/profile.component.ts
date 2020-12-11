@@ -11,13 +11,11 @@ import * as firebase from "nativescript-plugin-firebase/app";
 import { FirebaseService } from "~/services/firebase.service";
 
 import * as imagepicker from "nativescript-imagepicker";
-import { isAndroid, isIOS } from "tns-core-modules/ui/page";
-import * as fs from "tns-core-modules/file-system";
-import { fromBase64, ImageSource } from "tns-core-modules/image-source";
 import { MiscService } from "~/services/misc.service";
 import { of } from "rxjs";
 import { RouterExtensions } from "nativescript-angular";
 import { LocalUser } from "~/models/user";
+import { ImageSource, isAndroid, isIOS } from "@nativescript/core";
 
 @Component({
     templateUrl: "./profile.component.html",

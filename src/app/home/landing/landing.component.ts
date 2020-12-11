@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
 import { Team } from "~/models/team";
 import { Item, ItemService } from "~/services/items.service";
 import { UniversalService } from "~/services/universal.service";
@@ -8,7 +7,7 @@ import * as firebase from "nativescript-plugin-firebase/app";
 import { FirebaseService } from "~/services/firebase.service";
 import { of } from "rxjs";
 import { Fixture } from "~/models/fixture";
-import { Page } from "tns-core-modules/ui/page";
+import { Application, Page } from "@nativescript/core";
 
 @Component({
     selector: "app-landing",
@@ -267,7 +266,7 @@ export class LandingComponent implements OnInit {
     }
 
     onDrawerButtonTap(): void {
-        const sideDrawer = <RadSideDrawer>app.getRootView();
+        const sideDrawer = <RadSideDrawer><any>Application.getRootView();
         sideDrawer.showDrawer();
     }
 

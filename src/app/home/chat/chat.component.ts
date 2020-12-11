@@ -8,13 +8,9 @@ import {
 import { firestore } from "nativescript-plugin-firebase";
 import * as firebase from "nativescript-plugin-firebase/app";
 import { RadListView } from "nativescript-ui-listview";
-import { ListView } from "tns-core-modules/ui/list-view";
 import { FirebaseService } from "~/services/firebase.service";
 import { MiscService } from "~/services/misc.service";
 import * as imagepicker from "nativescript-imagepicker";
-import { isAndroid, isIOS } from "tns-core-modules/ui/page";
-import { fromBase64, ImageSource } from "tns-core-modules/image-source";
-import * as appSettings from "tns-core-modules/application-settings";
 import { of } from "rxjs";
 import {
     Downloader,
@@ -22,13 +18,7 @@ import {
     DownloadEventData,
 } from "nativescript-downloader";
 import { HandleFile } from "nativescript-handle-file";
-import * as utilsModule from "tns-core-modules/utils/utils";
-// import {openFile} from "nativescript-openfile";
-import { openFile } from "tns-core-modules/utils/utils";
-import * as fs from "tns-core-modules/file-system";
-import * as application from "tns-core-modules/application";
-import * as fsAccess from "tns-core-modules/file-system/file-system-access";
-import * as platform from "tns-core-modules/platform/platform";
+import { ApplicationSettings, Utils, knownFolders, ImageSource, isAndroid, isIOS, ListView } from "@nativescript/core";
 @Component({
     templateUrl: "./chat.component.html",
     styleUrls: ["./chat.component.scss"],
@@ -251,7 +241,7 @@ export class ChatComponent implements OnInit {
         const downloader = this.downloader;
 
         let downloadMetadata;
-        let filePath = fs.knownFolders.documents().path;
+        let filePath = knownFolders.documents().path;
         let fileName = this.misService.getFileName(item.fileUrl);
         if (isAndroid) {
             downloadMetadata = {
@@ -314,11 +304,11 @@ export class ChatComponent implements OnInit {
         console.log("openFile", fileUrl);
         if (fileUrl) {
             if (fileUrl.includes("file://")) {
-                openFile(fileUrl.replace("file://", ""));
+                Utils.openFile(fileUrl.replace("file://", ""));
             } else {
-                let appDirectory = fs.knownFolders.documents().path;
+                let appDirectory = knownFolders.documents().path;
                 //let file = appDirectory.getFile(`${splittedUrl[lt-2]}/${splittedUrl[lt-2]}`);
-                openFile(
+                Utils.openFile(
                     `${appDirectory}/${this.misService.getFileName(fileUrl)}`
                 );
             }
@@ -328,7 +318,7 @@ export class ChatComponent implements OnInit {
 
     persistLocalMessages() {
         new Promise((resolve, reject) => {
-            appSettings.setString("chats", JSON.stringify(this.chatMessages));
+            ApplicationSettings.setString("chats", JSON.stringify(this.chatMessages));
         })
             .then()
             .catch();
@@ -336,7 +326,7 @@ export class ChatComponent implements OnInit {
 
     getLocalMessages(): LocalChatMessage[] {
         try {
-            let localChats = appSettings.getString("chats");
+            let localChats = ApplicationSettings.getString("chats");
             let localChatMessages = JSON.parse(localChats);
             console.log("Local Chats", localChats);
             return localChatMessages;
