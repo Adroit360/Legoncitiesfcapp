@@ -1,0 +1,56 @@
+{
+  "nativescript": {
+    "id": "org.adroit360gh.legoncitiesfc",
+    "tns-android": {
+      "version": "6.5.3"
+    },
+    "tns-ios": {
+      "version": "6.5.3"
+    }
+  },
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "repository": "<fill-your-repository-here>",
+  "scripts": {
+    "lint": "tslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@angular/animations": "~8.2.0",
+    "@angular/common": "~8.2.0",
+    "@angular/compiler": "~8.2.0",
+    "@angular/core": "~8.2.0",
+    "@angular/forms": "~8.2.0",
+    "@angular/platform-browser": "~8.2.0",
+    "@angular/platform-browser-dynamic": "~8.2.0",
+    "@angular/router": "~8.2.0",
+    "@nativescript/theme": "~2.3.0",
+    "@nota/nativescript-webview-ext": "^6.5.5",
+    "nativescript-angular": "~8.21.0",
+    "nativescript-downloader": "^2.1.5",
+    "nativescript-exit": "^1.0.1",
+    "nativescript-exoplayer": "^4.0.2",
+    "nativescript-handle-file": "^4.0.0",
+    "nativescript-imagepicker": "^7.1.0",
+    "nativescript-phone": "^2.0.0",
+    "nativescript-plugin-firebase": "^10.6.3",
+    "nativescript-ui-listview": "^8.2.0",
+    "nativescript-ui-sidedrawer": "~8.0.0",
+    "nativescript-webview-plus": "^1.0.13",
+    "reflect-metadata": "~0.1.12",
+    "rxjs": "^6.4.0",
+    "tns-core-modules": "~6.5.0",
+    "tns-platform-declarations": "^6.5.15",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "~8.2.0",
+    "@ngtools/webpack": "~8.2.0",
+    "codelyzer": "~4.5.0",
+    "nativescript-dev-webpack": "~1.5.0",
+    "node-sass": "^4.7.1",
+    "tslint": "~5.19.0",
+    "typescript": "~3.5.3"
+  },
+  "gitHead": "20a65d338ae8f8911087ab6615b89363f864b07b",
+  "readme": "NativeScript Application"
+}
