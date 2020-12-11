@@ -33,10 +33,55 @@ $blue:blue;
 .pic{
     width: 50;
     height: 50;
-    padding: 10;
     margin: auto 20 auto 0;
     background-color: black;
     border-radius: 50%;
 }
 
 }
+
+.chatbox-container{
+
+    margin:10;
+        border-width: 1;
+        border-color:black;
+        border-radius: 20;
+
+    .file-grid{
+        .image-file{
+            background-color: black;
+            padding:0;
+            margin:0;
+            height: 0;
+            border-radius: 20 20 0 0;
+        }
+    }
+
+    .chat-box{
+        justify-content: space-between;
+        align-items: center;
+        
+        TextField{
+            flex-grow: 1;
+            font-size: 17;
+            border-color: transparent;
+            margin-bottom:5;
+        }
+        .btn-send{
+            font-size: 20;
+            margin:0 15 0 0;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+        .btn-attach{
+            font-size: 20;
+            margin:0 0 0 15;
+            flex-shrink: 0;
+        }
+    }
+
+    
+    
+   
+}
+

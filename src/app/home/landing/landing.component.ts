@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { Team } from "~/models/team";
@@ -219,6 +219,12 @@ export class LandingComponent implements OnInit {
 
     oldfixtures: Fixture[] = [];
 
+    ourId:string = "15";
+
+    @ViewChild("reloadLabel", { static: true }) reloadLabel: ElementRef;
+
+    rotating:boolean;
+
     constructor(
         private _itemService: ItemService,
         public firebaseService: FirebaseService,
@@ -256,59 +262,7 @@ export class LandingComponent implements OnInit {
             .firestore()
             .collection(this.firebaseService.collections.fixtures)
             .onSnapshot((snapshot) => {
-                this.fixtures = [];
-                snapshot.docs.forEach((doc) => {
-                    this.fixtures.push(<Fixture>doc.data());
-                });
-
-                // console.log("Raw Fixtures", this.fixtures);
-
-                this.upcomingFixtures = this.fixtures.filter((i) => {
-                    let _a = i.date.split("-");
-
-                    let date = new Date(
-                        parseInt(_a[0]),
-                        parseInt(_a[1]) - 1,
-                        parseInt(_a[2])
-                    ).getTime();
-
-                    return date - new Date().getTime() > 0;
-                });
-
-                this.upcomingFixtures.sort((a, b) => {
-                    let _a = a.date.split("-");
-                    let aDate = new Date(
-                        parseInt(_a[0]),
-                        parseInt(_a[1]) - 1,
-                        parseInt(_a[2])
-                    ).getTime();
-                    //console.log("aDate",a.date,new Date(aDate).toISOString(),aDate);
-                    let _b = b.date.split("-");
-                    let bDate = new Date(
-                        parseInt(_b[0]),
-                        parseInt(_b[1]) - 1,
-                        parseInt(_b[2])
-                    ).getTime();
-                    let diff = bDate - aDate;
-                    return diff;
-                });
-
-                //this.changeDetectorRef.detectChanges();
-                this.upcomingFixtures = this.upcomingFixtures.reverse();
-
-                this.oldfixtures = this.fixtures.filter((i) => {
-                    let _a = i.date.split("-");
-
-                    let date = new Date(
-                        parseInt(_a[0]),
-                        parseInt(_a[1]) - 1,
-                        parseInt(_a[2])
-                    ).getTime();
-
-                    return date - new Date().getTime() < 0;
-                });
-
-                // console.log("Sorted Fixtures", this.upcomingFixtures);
+              this.manipulateFixtureDocs(snapshot.docs)
             });
     }
 
@@ -335,5 +289,79 @@ export class LandingComponent implements OnInit {
     buyTickets() {
         //console.log("Buying tickets ..........");
         this.universalService.buyTicket();
+    }
+
+
+    manipulateFixtureDocs(docs){
+      this.fixtures = [];
+      docs.forEach((doc) => {
+          this.fixtures.push(<Fixture>doc.data());
+      });
+
+      // console.log("Raw Fixtures", this.fixtures);
+
+      this.upcomingFixtures = this.fixtures.filter((i) => {
+          let _a = i.date.split("-");
+
+          let date = new Date(
+              parseInt(_a[0]),
+              parseInt(_a[1]) - 1,
+              parseInt(_a[2])
+          ).getTime();
+            let today = new Date();
+            today.setDate(today.getDate() - 1);
+            return date - today.getTime() > 0;
+      });
+
+      this.upcomingFixtures.sort((a, b) => {
+          let _a = a.date.split("-");
+          let aDate = new Date(
+              parseInt(_a[0]),
+              parseInt(_a[1]) - 1,
+              parseInt(_a[2])
+          ).getTime();
+          //console.log("aDate",a.date,new Date(aDate).toISOString(),aDate);
+          let _b = b.date.split("-");
+          let bDate = new Date(
+              parseInt(_b[0]),
+              parseInt(_b[1]) - 1,
+              parseInt(_b[2])
+          ).getTime();
+          let diff = bDate - aDate;
+          return diff;
+      });
+
+      //this.changeDetectorRef.detectChanges();
+      this.upcomingFixtures = this.upcomingFixtures.reverse();
+
+      this.oldfixtures = this.fixtures.filter((i) => {
+          let _a = i.date.split("-");
+
+          let date = new Date(
+              parseInt(_a[0]),
+              parseInt(_a[1]) - 1,
+              parseInt(_a[2])
+          ).getTime();
+
+          let today = new Date();
+          today.setDate(today.getDate() - 1);
+
+          return date - today.getTime() < 0;
+      });
+
+      // console.log("Sorted Fixtures", this.upcomingFixtures);
+    }
+
+    reloadScore(){
+      this.rotating = true;
+      firebase
+      .firestore()
+      .collection(this.firebaseService.collections.fixtures)
+      .get()
+      .then((docs) => {
+        this.manipulateFixtureDocs(docs);
+        this.rotating = false;
+      });
+
     }
 }

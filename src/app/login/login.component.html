@@ -1,40 +1,69 @@
 <ActionBar title="Login"></ActionBar>
+<ScrollView>
 <GridLayout>
-    <StackLayout>
-        <GridLayout rows="250" class="top-indication">
-            <FlexboxLayout justifyContent="space-between">
-                <Image src="https://upload.wikimedia.org/wikipedia/en/b/b1/Legon_Cities_FC.png" width="30%"></Image>
-                <StackLayout width="60%" verticalAlignment="center">
-                    <GridLayout rows="auto,auto">
-                        <Label fontSize="30">
-                            <FormattedString>
-                                <Span class="main" text="Legon "></Span>
-                                <Span color="white"text="Cities"></Span>
-                            </FormattedString>
-                        </Label>
-                        <Label row="1" class="support" text="The Royals, We Deliver"></Label>
-                    </GridLayout>
-                </StackLayout>
-            </FlexboxLayout>
-        </GridLayout>
-        <GridLayout marginTop="50" rows="auto,*">
-            <Label padding="20">
-                <FormattedString>
-                    <Span text="Login " class="surname"></Span>
-                    <Span text="into your account"></Span>
-                </FormattedString>
+  <StackLayout>
+    <GridLayout rows="250" class="top-indication">
+      <FlexboxLayout justifyContent="space-between">
+        <Image
+          src="https://upload.wikimedia.org/wikipedia/en/b/b1/Legon_Cities_FC.png"
+          width="30%"
+        ></Image>
+        <StackLayout width="60%" verticalAlignment="center">
+          <GridLayout rows="auto,auto">
+            <Label fontSize="30">
+              <FormattedString>
+                <Span class="main" text="Legon "></Span>
+                <Span color="white" text="Cities"></Span>
+              </FormattedString>
             </Label>
-            <StackLayout row="1">
-                <TextField [(ngModel)]="email" marginBottom="20" hint="Email"></TextField>
-                <TextField [(ngModel)]="password" secure="true" hint="Password"></TextField>
-                <Button (tap)="signIn()" class="buyButton" text="Login"></Button>
-                <Button nsRouterLink="/signup" class="btn" text="Signup instead"></Button>
-            </StackLayout>
-        </GridLayout>
+            <Label
+              row="1"
+              class="support"
+              text="The Royals, We Deliver"
+            ></Label>
+          </GridLayout>
         </StackLayout>
-        <ActivityIndicator borderRadius="50%" backgroundColor="white" *ngIf="isLoading" rowSpan="3" color="black"
-        width="100" height="100" [busy]="true">
-      </ActivityIndicator>
-</GridLayout>
-
+      </FlexboxLayout>
+    </GridLayout>
     
+      <GridLayout marginTop="50" rows="auto,*">
+        <Label padding="20">
+          <FormattedString>
+            <Span text="Login " class="surname"></Span>
+            <Span text="into your account"></Span>
+          </FormattedString>
+        </Label>
+        <StackLayout row="1">
+          <TextField
+            [(ngModel)]="username"
+            marginBottom="20"
+            hint="Username"
+          ></TextField>
+          <TextField
+            [(ngModel)]="password"
+            secure="true"
+            hint="Password"
+          ></TextField>
+          <Button (tap)="signIn()" class="buyButton" text="Login"></Button>
+          <Button
+            nsRouterLink="/signup"
+            class="btn"
+            text="Signup instead"
+          ></Button>
+        </StackLayout>
+      </GridLayout>
+   
+  </StackLayout>
+  <ActivityIndicator
+    borderRadius="50%"
+    backgroundColor="white"
+    *ngIf="isLoading"
+    rowSpan="3"
+    color="black"
+    width="100"
+    height="100"
+    [busy]="true"
+  >
+  </ActivityIndicator>
+</GridLayout>
+</ScrollView>

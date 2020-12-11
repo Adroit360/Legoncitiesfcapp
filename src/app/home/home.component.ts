@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
@@ -12,6 +12,7 @@ import { of } from "rxjs";
 import * as fileSystemModule from "tns-core-modules/file-system";
 
 import { MiscService } from "~/services/misc.service";
+import { UniversalService } from "~/services/universal.service";
 
 
 @Component({
@@ -19,22 +20,30 @@ import { MiscService } from "~/services/misc.service";
     templateUrl: "./home.component.html",
 })
 export class HomeComponent implements OnInit {
+
+    @ViewChild("tabView",{static:true}) tabView:ElementRef;
+
     constructor(
         private router: Router,
         private firebaseService: FirebaseService,
         private page: Page,
         private miscService: MiscService,
+        private universalService:UniversalService,
         private activatedRoute: ActivatedRoute
     ) {
         // Use the component constructor to inject providers.
         //console.log(this.activatedRoute);
         page.backgroundSpanUnderStatusBar = true;
+        
     }
 
     ngOnInit(): void {
         // Init your component properties here.
 
         global['route'] = "home";
+
+        this.universalService.homeTabView = this.tabView.nativeElement;
+       
 
         this.router.navigate(
             [

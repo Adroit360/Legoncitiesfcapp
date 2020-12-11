@@ -13,26 +13,19 @@ import * as application from "tns-core-modules/application";
 import { exit } from "nativescript-exit";
 import { Router } from "@angular/router";
 import { MiscService } from "./misc.service";
+import { TabView } from "tns-core-modules/ui/tab-view";
 
 @Injectable()
 export class UniversalService{
     private sideDrawer:RadSideDrawerComponent;
     rootViewContainerRef:ViewContainerRef;
 
+    homeTabView:TabView;
+
     constructor(private httpClient:HttpClient,
         private miscService:MiscService,
         private router:Router) {
-        if (isAndroid) {
-            application.android.on(
-                AndroidApplication.activityBackPressedEvent,
-                (data: AndroidActivityBackPressedEventData) => {
-                    if (global['route'] == 'home') {
-                        data.cancel = true; // prevents default back button behavior
-                        this.showExitPopup();
-                    }
-                }
-            );
-        }
+       
     }
 
     toggleDrawer(){
@@ -46,7 +39,7 @@ export class UniversalService{
     }
 
     buyTicket(){
-        this.dialNumber("*284#");
+        this.dialNumber("*968#");
     }
 
     public dialNumber(number) {
@@ -87,5 +80,19 @@ export class UniversalService{
                     exit();
                 }
             });
+    }
+
+    registerBackPressedListener(){
+        if (isAndroid) {
+            application.android.on(
+                AndroidApplication.activityBackPressedEvent,
+                (data: AndroidActivityBackPressedEventData) => {
+                    if (this.router.isActive("/home", false)) {
+                        data.cancel = true; // prevents default back button behavior
+                        this.showExitPopup();
+                    }
+                }
+            );
+        }
     }
 }

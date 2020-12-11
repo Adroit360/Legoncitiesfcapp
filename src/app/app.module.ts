@@ -28,6 +28,8 @@ import { RouteReuseStrategy } from "@angular/router";
 import { RouteStrategy } from "~/services/route-reuse.strategy";
 import { NotificationService } from "~/services/notification.service";
 import { BlogComponent } from "./home/blog/blog.component";
+import { FileTypePipe } from "~/pipes/ismage.pipe";
+import { Downloader } from 'nativescript-downloader';
 
 // We can pass a configuration option here.
             firebaseCore
@@ -58,6 +60,15 @@ import { BlogComponent } from "./home/blog/blog.component";
 //     storageBucket: "org.nativescript.legoncitiesfcapp",
 // });
 
+
+
+Downloader.init(); // <= Try calling this after the app launches to start the downloader service
+// Downloader.setTimeout(120);
+
+
+// somewhere at top of your component or bootstrap file
+import {registerElement} from "nativescript-angular/element-registry";
+registerElement("exoplayer", () => require("nativescript-exoplayer").Video);
 @NgModule({
     bootstrap: [AppComponent],
     imports: [
@@ -66,8 +77,7 @@ import { BlogComponent } from "./home/blog/blog.component";
         NativeScriptUISideDrawerModule,
         SharedModule,
         NativeScriptHttpClientModule,
-        WebViewExtModule,
-        NativeScriptUIListViewModule,
+        WebViewExtModule
     ],
     declarations: [
         AppComponent,
@@ -81,14 +91,17 @@ import { BlogComponent } from "./home/blog/blog.component";
         RadioComponent,
         LeagueTableComponent,
         ContactComponent,
-        ChatComponent
+        ChatComponent,
+        FileTypePipe
     ],
     providers: [UniversalService,NotificationService, ItemService, FirebaseService, MiscService],
     schemas: [NO_ERRORS_SCHEMA],
 })
 export class AppModule implements OnInit {
-    constructor(private notificationService:NotificationService){
-        
+    constructor(private notificationService:NotificationService,
+        private UniversalService:UniversalService){
+        notificationService.registerForNotifications();
+        UniversalService.registerBackPressedListener();
     }
 
     ngOnInit(){

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
-import { isAndroid } from "tns-core-modules/ui/page";
+import { isAndroid, isIOS } from "tns-core-modules/ui/page";
 import { WebView } from "tns-core-modules/ui/web-view";
 import {
     AndroidApplication,
@@ -24,6 +24,8 @@ export class LeagueTableComponent implements OnInit {
     _webView: WebViewExt;
     canGoBack = false;
     canGoForward = false;
+
+    src = "https://www.sofascore.com/tournament/9949/34701/standings/tables/embed";
     constructor() {}
 
     ngOnInit(): void {
@@ -50,6 +52,7 @@ export class LeagueTableComponent implements OnInit {
     }
 
     onLoadStarted(event) {
+        
         this.isLoading = true;
         let webView = <WebView>this.webView.nativeElement;
         if (webView.android) {
@@ -61,7 +64,7 @@ export class LeagueTableComponent implements OnInit {
     onLoadFinished(event: any) {
         
         // event.error
-     this._webView.executeJavaScript(`document.querySelectorAll("div[title =' - Legon Cities']").forEach(element => {
+        this._webView.executeJavaScript(`document.querySelectorAll("div[title =' - Legon Cities']").forEach(element => {
                                          element.parentElement.style.backgroundColor = "pink"
                                       });
                                       document.querySelector(".embed-download-box").style.display = 'none';

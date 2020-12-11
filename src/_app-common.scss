@@ -61,6 +61,7 @@
     .btn{
         background-color: white;
         width:150;
+        color: black;
     }
 }
 // Drawer navigation custom styles
@@ -119,8 +120,31 @@
 ActionBar{
     background-color: black;
     color:white;
+    margin-top:-22;
 }
+
+// .action-bar {
+//     margin-top:-22;  
+//   }
 
 .error-page{
     background-color: white;
+}
+
+
+TextField{
+    font-size: 17;
+}
+
+.flex-center{
+
+    justify-content: center;
+    align-items: center;
+}
+
+.rnd-border{
+    border-color: black;
+    border-width: 1;
+    border-radius: 3;
+    margin:5 0;
 }

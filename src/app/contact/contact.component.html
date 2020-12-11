@@ -1,30 +1,32 @@
 <ActionBar title="Our Information"></ActionBar>
-<ScrollView class="contact">
-    <StackLayout class="contact__body">
-        <StackLayout>
-            <Image src="~/assets/contact.png"></Image>
-        </StackLayout>
-        <StackLayout class="info-box">
-            <Label class="sub-heading" text="Former coaches"></Label> 
-            <FlexboxLayout class="info item">
-                <ScrollView  orientation="horizontal">
-                    <Label fontWeight="bold" text="H/No 10, Augostino Neto Road, Airport Residential Area, Accra"></Label>
-                </ScrollView>
-            </FlexboxLayout>
-            
-            <Label class="sub-heading" text="Digital Address"></Label>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="GA-003-4422"></Label>
-            </FlexboxLayout>
-            <Label class="sub-heading" text="Email Address"></Label>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="info@legoncitiesfc.com"></Label>
-            </FlexboxLayout>
-            <Label class="sub-heading" text="Telephone"></Label>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="0302216549"></Label>
-            </FlexboxLayout>
-        </StackLayout>
+<GridLayout rows="auto,*">
+    <StackLayout padding="-1" class="top-indication">
+        <Image borderRadius="0 0 20 20" src="~/assets/players.png"></Image>
     </StackLayout>
-    
-</ScrollView>
+    <ScrollView row="2" class="contact">
+        <StackLayout margin="15" class="contact__body">
+            <StackLayout class="info-box">
+                <Label class="sub-heading" text="Address"></Label> 
+                <FlexboxLayout class="info item">
+                    <ScrollView  orientation="horizontal">
+                        <Label fontWeight="bold" text="H/No 10, Augostino Neto Road, Airport Residential Area, Accra"></Label>
+                    </ScrollView>
+                </FlexboxLayout>
+                
+                <Label class="sub-heading" text="Digital Address"></Label>
+                <FlexboxLayout class="info item">
+                    <Label fontWeight="bold" text="GA-003-4422"></Label>
+                </FlexboxLayout>
+                <Label class="sub-heading" text="Email Address"></Label>
+                <FlexboxLayout class="info item">
+                    <Label fontWeight="bold" text="info@legoncitiesfc.com"></Label>
+                </FlexboxLayout>
+                <Label class="sub-heading" text="Telephone"></Label>
+                <FlexboxLayout class="info item">
+                    <Label fontWeight="bold" text="0302216549"></Label>
+                </FlexboxLayout>
+            </StackLayout>
+        </StackLayout>
+        
+    </ScrollView>
+</GridLayout>

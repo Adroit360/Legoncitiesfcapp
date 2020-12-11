@@ -28,16 +28,16 @@
             <StackLayout *ngIf="localUser" padding="20" row="1">
                 <TextField *ngIf="isEditMode" [(ngModel)]="localUser.displayName" class="fields" hint="Name"></TextField>
                 <FlexboxLayout *ngIf="!isEditMode" class="info item">
-                    <Label fontWeight="bold" text="Name"></Label>
+                    <Label fontWeight="bold" text="User Name"></Label>
                     <Label text="  "></Label>
                     <Label [text]="localUser.displayName"></Label>
                 </FlexboxLayout>
-                <TextField *ngIf="isEditMode" [(ngModel)]="localUser.email" class="fields" hint="Email"></TextField>
-                <FlexboxLayout *ngIf="!isEditMode" class="info item">
+                <!-- <TextField *ngIf="isEditMode" [(ngModel)]="localUser.email" class="fields" hint="Email"></TextField> -->
+                <!-- <FlexboxLayout *ngIf="!isEditMode" class="info item">
                     <Label fontWeight="bold" text="Email"></Label>
                     <Label text="  "></Label>
                     <Label [text]="localUser.email"></Label>
-                </FlexboxLayout>
+                </FlexboxLayout> -->
                 <!-- <TextField class="fields" hint="Email"></TextField> -->
                 <TextField *ngIf="isEditMode" [(ngModel)]="localUser.phoneNumber" class="fields" hint="Phone number"></TextField>
                 <FlexboxLayout *ngIf="!isEditMode" class="info item">

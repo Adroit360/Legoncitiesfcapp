@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "387370557775-abech31jd45aefj0uuoeappsceo9hiug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.adroit360gh.legoncitiesfc",
+            "certificate_hash": "1dd8d87a23b8510ca258400d9fc720b34dba9e00"
+          }
+        },
+        {
+          "client_id": "387370557775-kputohvj9rgll6dei1ea9u5viss7hqji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.adroit360gh.legoncitiesfc",
+            "certificate_hash": "68299a5a133882df5c98d6f1d5d13903d9f5a77e"
+          }
+        },
+        {
           "client_id": "387370557775-nthpccmn2in906dq7489jokbtk6vc9g8.apps.googleusercontent.com",
           "client_type": 3
         }

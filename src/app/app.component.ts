@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { Application, Page } from "@nativescript/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
-import * as app from "tns-core-modules/application";
-import { Page } from "tns-core-modules/ui/page";
+// import * as app from "tns-core-modules/application";
+// import { Page } from "tns-core-modules/ui/page";
 import { FirebaseService } from "~/services/firebase.service";
 
 @Component({
@@ -14,7 +15,7 @@ import { FirebaseService } from "~/services/firebase.service";
 export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
-
+    splashShown = true;
     constructor(private router: Router, 
         public firebaseService:FirebaseService,
         private page:Page,
@@ -49,11 +50,16 @@ export class AppComponent implements OnInit {
             }
         });
 
-        const sideDrawer = <RadSideDrawer>app.getRootView();
+        const sideDrawer = <RadSideDrawer><any>Application.getRootView();
         sideDrawer.closeDrawer();
     }
 
     signOut(){
         this.firebaseService.signOut();
     }
+
+    splashFinished(){
+        this.splashShown = false;
+    }
+
 }

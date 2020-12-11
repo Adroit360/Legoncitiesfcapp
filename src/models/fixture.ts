@@ -4,4 +4,5 @@ export class Fixture{
     date:string;
     homeScore:string;
     awayScore:string;
+    time:string;
 }

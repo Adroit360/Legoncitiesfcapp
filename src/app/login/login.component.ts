@@ -9,6 +9,7 @@ import { MiscService } from "~/services/misc.service";
     styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
+    username:string;
     email: string;
     password: string;
     isLoading: boolean = false;
@@ -26,6 +27,13 @@ export class LoginComponent implements OnInit {
     async signIn() {
         this.isLoading = true;
         let that = this;
+
+        if(this.username.trim().includes(" ")){
+            this.miscService.alert("Invalid Usename","Username cannot contain spaces");
+            return;
+        }
+        this.email = `${this.username.trim()}@gmail.com`;
+
         await this.firebaseService
             .signIn(this.email, this.password)
             .then(() => {
@@ -35,6 +43,8 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(["home"]);
                 // this.changeDetectorRef.detectChanges();
             }).catch((err) => {
+                try{err.message = err.message.replace("email address","username");}catch(ex){};
+
                 this.miscService.alert("falure", err.message);
                 //console.log(err);
                 this.isLoading = false;

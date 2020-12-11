@@ -2,41 +2,138 @@
   <!-- Chat preview -->
   <StackLayout colSpan="3" class="top-indication"> </StackLayout>
   <!-- <ScrollView row="1" col="1"> -->
-    <GridLayout row="1" col="1" class="chats">
-      <RadListView #listView [items]="chatMessages">
-        <ListViewLinearLayout tkListViewLayout></ListViewLinearLayout>
-        <ng-template tkListItemTemplate let-i="index" let-item="item">
-          <GridLayout columns="auto,*" rows="auto" class="comment">
-            <Image
-              stretch="fill"
-              [src]="item.photoURL"
-              class="pic"
-              text=""
-            ></Image>
-            <StackLayout col="3" class="chat">
-              <FlexboxLayout justifyContent="space-between" alignItems="center">
-                <Label class="name" [text]="item.name"></Label>
-                <Label class="name" [text]="item.dateTime"></Label>
+  <GridLayout row="1" col="1" class="chats">
+    <ListView separatorColor="transparent" #listView [items]="chatMessages">
+      <ListViewLinearLayout tkListViewLayout></ListViewLinearLayout>
+      <ng-template tkListItemTemplate let-i="index" let-item="item">
+        <GridLayout columns="auto,*" rows="auto" class="comment">
+          <Image
+            stretch="aspectFill"
+            [src]="item.photoURL"
+            class="pic"
+            text=""
+          ></Image>
+          <StackLayout col="3" class="chat">
+            <FlexboxLayout justifyContent="space-between" alignItems="center">
+              <Label
+                fontSize="12"
+                fontWeight="bold"
+                class="name"
+                [text]="item.name"
+              ></Label>
+              <Label fontSize="12" class="name" [text]="item.dateTime"></Label>
+            </FlexboxLayout>
+
+            <FlexboxLayout
+              height="150"
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor="black"
+              color="white"
+              *ngIf="!item.localFileUrl && (item.fileUrl | fileType) == 'image'"
+            >
+              <Label
+                *ngIf="!item.isBusy"
+                (tap)="downloadFile(item)"
+                color="white"
+                class="fas"
+                fontSize="40"
+                text="&#xf358;"
+              ></Label>
+              <ActivityIndicator
+                *ngIf="item.isBusy"
+                [busy]="true"
+              ></ActivityIndicator>
+            </FlexboxLayout>
+
+            <GridLayout *ngIf="(item.localFileUrl | fileType) == 'image'">
+              <Image
+                (tap)="openFile(item.localFileUrl)"
+                [src]="item.localFileUrl"
+              ></Image>
+            </GridLayout>
+
+            <GridLayout backgroundColor="black" color="white" class="rnd-border" columns="*,auto" *ngIf="((item.localFileUrl | fileType) == 'file') || ((item.fileUrl | fileType) == 'file')">
+              <FlexboxLayout col="0" alignItems="center">
+                <Label fontSize="30" text="&#xf15b;" class="fas"></Label>
+                <!-- <Label [text]="item.fileName"></Label> -->
+                <Label fontSize="17" [text]="item.fileName"></Label>
               </FlexboxLayout>
 
-              <Label class="msg" textWrap="true" [text]="item.text"></Label>
-            </StackLayout>
-          </GridLayout>
-        </ng-template>
-      </RadListView>
-      <!-- End -->
-    </GridLayout>
+              <FlexboxLayout class="flex-center" col="1" *ngIf="!item.localFileUrl">
+                <Label
+                  paddingRight="5"
+                  *ngIf="!item.isBusy"
+                  (tap)="downloadFile(item)"
+                  color="white"
+                  class="fas"
+                  fontSize="40"
+                  text="&#xf358;"
+                ></Label>
+                <ActivityIndicator
+                  marginTop="5"
+                  *ngIf="item.isBusy"
+                  [busy]="true"
+                ></ActivityIndicator>
+              </FlexboxLayout>
+
+              <FlexboxLayout class="flex-center" col="1" *ngIf="item.localFileUrl">
+                <Label
+                marginTop="5"
+                paddingRight="5"
+                  (tap)="openFile(item.localFileUrl)"
+                  color="white"
+                  class="fas"
+                  fontSize="14"
+                  text="open"
+                ></Label>
+              </FlexboxLayout>
+
+            </GridLayout>
+
+            <Label
+              fontSize="15"
+              class="msg"
+              textWrap="true"
+              [text]="item.text"
+            ></Label>
+          </StackLayout>
+        </GridLayout>
+      </ng-template>
+    </ListView>
+    <!-- End -->
+  </GridLayout>
   <!-- </ScrollView> -->
   <!-- Chat -->
-  <FlexboxLayout *ngIf="firebaseService.currentUser" col="1" row="2">
-    <TextField
-      #chatTextBox
-      [(ngModel)]="chatText"
-      width="70%"
-      hint="Enter text"
-    ></TextField>
-    <Button (tap)="sendText()" class="buyButton" text="Send"></Button>
-  </FlexboxLayout>
+  <GridLayout col="1" row="2" class="chatbox-container" rows="auto,auto">
+    <GridLayout *ngIf="fileSrc" columns="*,auto" class="file-grid">
+      <Image
+        colSpan="2"
+        class="image-file"
+        stretch="aspectFill"
+        [height]="imageHeight"
+        [src]="fileSrc"
+      ></Image>
+      <Label
+        margin="10"
+        fontSize="20"
+        col="1"
+        (tap)="clearAttachment()"
+        class="fas btn-attach"
+        text="&#xf057;"
+      ></Label>
+    </GridLayout>
+
+    <FlexboxLayout row="2" class="chat-box" *ngIf="firebaseService.currentUser">
+      <Label (tap)="attach()" class="fas btn-attach" text="&#xf0c6;"></Label>
+      <TextField
+        #chatTextBox
+        [(ngModel)]="chatText"
+        hint="Enter text"
+      ></TextField>
+      <Label (tap)="sendText()" class="fas btn-send" text="&#xf1d8;"></Label>
+    </FlexboxLayout>
+  </GridLayout>
 
   <Label
     *ngIf="!firebaseService.currentUser"

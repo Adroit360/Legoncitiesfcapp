@@ -23,11 +23,11 @@
     <Label text=""></Label>
 </ActionBar>
 <!-- , iconSource: 'res://icon' -->
-<TabView androidTabsPosition="bottom" (loaded)="onLoaded($event)" class="main-tab-view" selectedIndex="0" >
+<TabView #tabView androidTabsPosition="bottom" (loaded)="onLoaded($event)" class="main-tab-view" selectedTabTextColor="#FFC107" selectedIndex="0" >
     <StackLayout *tabItem="{title: 'Home',iconSource:'res://homehome'}">
         <router-outlet name="landing"></router-outlet>
     </StackLayout>
-    <StackLayout *tabItem="{title: 'Live',iconSource:'res://futbolsolid'}">
+    <StackLayout *tabItem="{title: 'Live', iconSource:'res://futbolsolid'}">
         <router-outlet name="fixtures"></router-outlet>
     </StackLayout>
     <StackLayout *tabItem="{title: 'Players',iconSource:'res://teams'}">

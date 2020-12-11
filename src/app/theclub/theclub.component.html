@@ -1,53 +1,58 @@
 
 <ActionBar title="The Club"></ActionBar>
-<ScrollView class="theclub">
-    <FlexboxLayout class="theclub__top">
-        <StackLayout class="theclub__logo">
-            <Image src="~/assets/logo"></Image>
-        </StackLayout>
+<GridLayout rows="auto,*">
+    <StackLayout class="top-indication">
 
-        <StackLayout class="info-box">
-            <FlexboxLayout justifyContent="center" class="info">
-                <!-- <Label fontWeight="bold" text="Full name"></Label>
-                <Label text=" "></Label> -->
-                <Label fontWeight="bold" text="Legon Cities Football Club"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="Nickname(s)"></Label>
-                <Label text="  "></Label>
-                <Label text="The Royals"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="Founded"></Label>
-                <Label text="  "></Label>
-                <Label text="2006"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="Ground"></Label>
-                <Label text="  "></Label>
-                <Label text="Accra Sports Stadium"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout class="info item">
-                <Label  fontWeight="bold" text="Chairman"></Label>
-                <Label text="  "></Label>
-                <Label text="Richard K. Atikpo"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout class="info item">
-                <Label fontWeight="bold" text="Manager"></Label>
-                <Label text="  "></Label>
-                <Label text="Goran Barjaktarević"></Label>
-            </FlexboxLayout>
-        </StackLayout>
+    </StackLayout>
 
-        <StackLayout class="more-info">
-            <Label class="heading" text="History"></Label>
-            <Label class="text" textWrap="true" text="The club was founded in January 2006 through investments by Kwesi Nyantakyi in Wa, Ghana. There had been a number of First Division Clubs in the region notably Freedom Stars, Veterans and Wa United. They are a member of the Ghana Premier League. The club used to play their home games at Wa Sports Stadium formerly played in the Golden City Park in Berekum but now plays their home games at the Accra Sports Stadium.In December 2019, the club was sold and renamed to Legon Cities F.C"></Label>
-            <Label class="heading" text="Former coaches"></Label>
-            <Label class="text" text="Mehmet Tayfun Türkmen"></Label>
-            <Label class="heading" text="Honours"></Label>
-            <Label class="text" text="Ghana Premier League"></Label>
-            <Label class="text" text="Champions: 2016"></Label>
-        </StackLayout>
-        
-    </FlexboxLayout>
-</ScrollView>
+    <ScrollView row="1" class="theclub">
+        <FlexboxLayout class="theclub__top">
+            <StackLayout class="theclub__logo">
+                <Image src="~/assets/logo.png"></Image>
+            </StackLayout>
+    
+            <StackLayout class="info-box">
+                <FlexboxLayout justifyContent="center" class="info">
+                    <!-- <Label fontWeight="bold" text="Full name"></Label>
+                    <Label text=" "></Label> -->
+                    <Label fontWeight="bold" text="Legon Cities Football Club"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="info col item">
+                    <Label class="first" text="Nickname(s)"></Label>
+                    <Label class="second" text="The Royals"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="info col item">
+                    <Label class="first" text="Founded"></Label>
+                    <Label class="second" text="2006"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="info col item">
+                    <Label class="first" text="Ground"></Label>
+                    <Label class="second" text="Accra Sports Stadium"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="info col item">
+                    <Label  class="first" text="Chairman"></Label>
+                    <Label class="second" text="Richard K. Atikpo"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="info col item">
+                    <Label class="first" text="Chief Executive Officer"></Label>
+                    <Label class="second" text="Terry Maxwell Aidam"></Label>
+                </FlexboxLayout>
+                <FlexboxLayout class="info col item">
+                    <Label class="first" text="Manager"></Label>
+                    <Label class="second" text="Goran Barjaktarević"></Label>
+                </FlexboxLayout>
+            </StackLayout>
+    
+            <StackLayout class="more-info">
+                <Label class="heading" text="History"></Label>
+                <Label class="text" textWrap="true" text="The club was founded in January 2006 through investments by Kwesi Nyantakyi in Wa, Ghana. There had been a number of First Division Clubs in the region notably Freedom Stars, Veterans and Wa United. They are a member of the Ghana Premier League. The club used to play their home games at Wa Sports Stadium formerly played in the Golden City Park in Berekum but now plays their home games at the Accra Sports Stadium.In December 2019, the club was sold and renamed to Legon Cities F.C"></Label>
+                <Label class="heading" text="Former coaches"></Label>
+                <Label class="text" text=""></Label>
+                <Label class="heading" text="Honours"></Label>
+                <Label class="text" text="Ghana Premier League"></Label>
+                <Label class="text" text="Champions: 2016"></Label>
+            </StackLayout>
+            
+        </FlexboxLayout>
+    </ScrollView>
+</GridLayout>

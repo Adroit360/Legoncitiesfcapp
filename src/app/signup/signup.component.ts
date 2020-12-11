@@ -2,6 +2,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    OnInit,
     ViewChild,
 } from "@angular/core";
 import { User } from "nativescript-plugin-firebase";
@@ -24,7 +25,7 @@ import { Image } from "tns-core-modules/ui/image";
     templateUrl: "./signup.component.html",
     styleUrls: ["./signup.component.scss"],
 })
-export class signupComponent {
+export class signupComponent implements OnInit{
     name: string;
     email: string;
     jerseyNumber: string;
@@ -54,11 +55,20 @@ export class signupComponent {
         
     }
 
+    ngOnInit(){
+        global['route'] = "signup";
+    }
+
     signup(user: User) {
         // console.log("name",this.name);
 
-        let that = this;
+        if(this.name.trim().includes(" ")){
+            this.miscService.alert("Invalid Usename","Username cannot contain spaces");
+            return;
+        }
 
+        let that = this;
+        this.email = `${this.name.trim()}@gmail.com`;
         let userId: any;
         this.isLoading = true;
         firebase
@@ -84,7 +94,7 @@ export class signupComponent {
                                 // })
                                 .catch((error) => {
                                     return of({ downloadURL: "" }).toPromise();
-                                })
+                            })
                         );
                     }
                     if (isIOS) {
@@ -119,6 +129,7 @@ export class signupComponent {
                 that.isLoading = false;
             })
             .catch((error) => {
+                try{error = error.replace("email address","username");}catch(ex){};
                 that.miscService.alert("info", error);
                 that.isLoading = false;
             });
@@ -146,7 +157,7 @@ export class signupComponent {
                 return context.present();
             })
             .then(async (selection) => {
-                console.log("Selection done: " + JSON.stringify(selection));
+                //console.log("Selection done: " + JSON.stringify(selection));
                 let selected = selection.length > 0 ? selection[0] : null;
                 that.androidSelectedImageAsset = selected;
                 //if(selected){

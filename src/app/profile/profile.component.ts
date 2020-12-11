@@ -2,6 +2,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    OnInit,
     ViewChild,
 } from "@angular/core";
 import { User } from "nativescript-plugin-firebase";
@@ -22,7 +23,7 @@ import { LocalUser } from "~/models/user";
     templateUrl: "./profile.component.html",
     styleUrls: ["./profile.component.scss"],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
     imageSrc: any = "~/assets/account.png";
     imageName: string;
     thumbSize: number = 80;
@@ -46,7 +47,9 @@ export class ProfileComponent {
     ) {
         this.currentUseGotten()
     }
-
+    ngOnInit(){
+        global['route'] = "profile";
+    }
     async edit(user: User) {
         // console.log("name",this.name);
         try {
@@ -56,6 +59,13 @@ export class ProfileComponent {
             this.isLoading = true;
 
             let newDownloadUrl = this.localUser.photoURL;
+
+
+            if(this.localUser.displayName.trim().includes(" ")){
+                this.miscService.alert("Invalid Usename","Username cannot contain spaces");
+                return;
+            }
+            this.localUser.email = `${this.localUser.displayName.trim()}@gmail.com`;
 
             if (this.imageChanged) {
                 await firebase

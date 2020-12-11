@@ -61,11 +61,11 @@ export class BlogComponent {
 
     onLoadStarted(event) {
         this.webviewLoading = true;
-        let webView = <WebView>this.webView.nativeElement;
-        if (webView.android) {
-            webView.android.getSettings().setBuiltInZoomControls(false);
-            webView.android.getSettings().setDisplayZoomControls(false);
-        }
+        // let webView = <WebView>this.webView.nativeElement;
+        // if (webView.android) {
+        //     webView.android.getSettings().setBuiltInZoomControls(false);
+        //     webView.android.getSettings().setDisplayZoomControls(false);
+        // }
     }
 
     onLoadFinished(event: any) {

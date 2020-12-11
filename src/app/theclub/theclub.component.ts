@@ -14,6 +14,7 @@ export class TheClubComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        global['route'] = "theclub";
         // Init your component properties here.
     }
 

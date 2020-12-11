@@ -8,26 +8,41 @@ import * as fs from "tns-core-modules/file-system";
 import { ImageSource } from "tns-core-modules/image-source";
 import { MiscService } from "./misc.service";
 import { LocalUser } from "~/models/user";
+import { OnInit } from "@angular/core";
+import * as application from "tns-core-modules/application";
 
-export class FirebaseService {
-    currentUser? : LocalUser;
+export class FirebaseService implements OnInit {
+    currentUser?: LocalUser;
     storageKeys = {
         currrentUser: "current-user",
+        credentials: "credentials",
     };
 
     collections = {
-        users:"users",
-        chats:"chats",
-        news:"news",
-        teams:"teams",
-        fixtures:"fixtures",
-        settings:"settings",
-        players:"players"
+        users: "users",
+        chats: "chats",
+        news: "news",
+        teams: "teams",
+        fixtures: "fixtures",
+        settings: "settings",
+        players: "players",
+    };
+
+    constructor(private miscService: MiscService) {
+        this.monitorAuthStateChanges();
+
+        try {
+            let cred: { email; password } = JSON.parse(
+                appStorage.getString(this.storageKeys.credentials)
+            );
+
+            if (cred) {
+                this.signIn(cred.email, cred.password);
+            }
+        } catch (ex) {}
     }
 
-    constructor(private miscService:MiscService) {
-        this.monitorAuthStateChanges();
-    }
+    ngOnInit() {}
 
     monitorAuthStateChanges() {
         firebase.auth().onAuthStateChanged(
@@ -46,7 +61,8 @@ export class FirebaseService {
                                 this.storageKeys.currrentUser,
                                 JSON.stringify(this.currentUser)
                             );
-                        }).catch(this.checkIfLoggedIn);
+                        })
+                        .catch(this.checkIfLoggedIn);
                 } else {
                     this.currentUser = null;
                     appStorage.remove(this.storageKeys.currrentUser);
@@ -58,9 +74,9 @@ export class FirebaseService {
 
     checkIfLoggedIn() {
         let userString = appStorage.getString(this.storageKeys.currrentUser);
-        if(userString){
+        if (userString) {
             this.currentUser = JSON.parse(userString);
-        }else{
+        } else {
             this.currentUser = null;
         }
     }
@@ -91,7 +107,7 @@ export class FirebaseService {
 
     // upload file
     private basePath = "profilePictures";
-    uploadImage(data: ImageSource , imageName: string , imagePath = null) {
+    uploadImage(data: ImageSource, imageName: string, imagePath = null) {
         const storageRef = firebase.storage().ref();
         const childRef = storageRef.child(`uploads/images/${imageName}`);
 
@@ -101,24 +117,37 @@ export class FirebaseService {
             contentLanguage: "en",
         };
 
-        if(imagePath){
-            return childRef.put(imagePath,metadata);
+        if (imagePath) {
+            return childRef.put(imagePath, metadata);
         }
 
         let folder = fs.knownFolders.documents();
         var path = fs.path.join(folder.path, `${imageName}.jpg`);
         var saved = data.saveToFile(path, "jpg");
-        return childRef.put(path,metadata);
+        return childRef.put(path);
     }
 
-    signIn(email,password){
-        return firebase.auth().signInWithEmailAndPassword(email,password)
+    uploadFile(filePath: string, fileName: string) {
+        const storageRef = firebase.storage().ref();
+        const childRef = storageRef.child(`uploads/chatfiles/${fileName}`);
+
+        // if you don't want/need to include metadata, pass in an empty object ({}) to avoid errors
+        return childRef.put(filePath, {});
     }
 
-    signOut(){
-        firebase.auth().signOut();
-        appStorage.remove(
-            this.storageKeys.currrentUser
+    signIn(email, password) {
+        appStorage.setString(
+            this.storageKeys.credentials,
+            JSON.stringify({ email, password })
         );
+        return firebase.auth().signInWithEmailAndPassword(email, password);
     }
+
+    signOut() {
+        firebase.auth().signOut();
+        appStorage.remove(this.storageKeys.currrentUser);
+        appStorage.remove(this.storageKeys.credentials);
+    }
+
+   
 }

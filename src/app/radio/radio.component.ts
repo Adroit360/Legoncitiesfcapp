@@ -32,6 +32,7 @@ export class RadioComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit(): void {
+        global["route"] = "radio";
         // Use the component constructor to inject providers.
         this._webView = <WebViewExt>this.webView.nativeElement;
         // if (isAndroid) {
@@ -63,20 +64,20 @@ export class RadioComponent implements OnInit, OnDestroy {
     async onLoadFinished(event: any) {
         await this.wait(1000);
 
-        this._webView.executeJavaScript(`
-            
-                    var play = document.getElementById("play");
-                    let playIcon = document.querySelector("#play i");
-                    let playText = document.querySelector("#play span");
+        if (isAndroid) {
+            this._webView.executeJavaScript(`
+                    var play = document.getElementById('play');
+                    let playIcon = document.querySelector('#play i');
+                    let playText = document.querySelector('#play span');
         
-                    var stop = document.getElementById("stop");
-                    var stopIcon = document.querySelector("#stop i");
-                    var stopText = document.querySelector("#stop span");
+                    var stop = document.getElementById('stop');
+                    var stopIcon = document.querySelector('#stop i');
+                    var stopText = document.querySelector('#stop span');
     
         
-                    var error = document.getElementById("error");
-                    var errorIcon = document.querySelector("#error i");
-                    var errorText = document.querySelector("#error span");
+                    var error = document.getElementById('error');
+                    var errorIcon = document.querySelector('#error i');
+                    var errorText = document.querySelector('#error span');
         
                     play.style.position = 'fixed';
                     play.style.left = '0px';
@@ -115,46 +116,46 @@ export class RadioComponent implements OnInit, OnDestroy {
                     error.style.backgroundPosition = 'center';
                     error.style.backgroundSize = 'cover';
         
-                    playIcon.style.width = "35vw";
-                    playIcon.style['text-align'] = "right";
+                    playIcon.style.width = '35vw';
+                    playIcon.style['text-align'] = 'right';
                     playIcon.style['line-height'] = "100vh";
                     playIcon.style.color = '#fcd206';
                     playIcon.style.fontSize = '25px';
                     
-                    playText.style.width = "65vw";
-                    playText.style['text-align'] = "left";
+                    playText.style.width = '65vw';
+                    playText.style['text-align'] = 'left';
                     playText.style.color = '#fcd206';
                     playText.style.fontSize = '25px';
         
-                    stopIcon.style.width = "35vw";
-                    stopIcon.style['text-align'] = "right";
-                    stopIcon.style['line-height'] = "100vh";
+                    stopIcon.style.width = '35vw';
+                    stopIcon.style['text-align'] = 'right';
+                    stopIcon.style['line-height'] = '100vh';
                     stopIcon.style.color = '#fcd206';
                     stopIcon.style.fontSize = '25px';
         
-                    stopText.style.width = "65vw";
-                    stopText.style['text-align'] = "left";
+                    stopText.style.width = '65vw';
+                    stopText.style['text-align'] = 'left';
                     stopText.style.color = '#fcd206';
                     stopText.style.fontSize = '25px';
         
                    
         
-                    errorIcon.style.width = "35vw";
-                    errorIcon.style['text-align'] = "right";
-                    errorIcon.style['line-height'] = "100vh";
+                    errorIcon.style.width = '35vw';
+                    errorIcon.style['text-align'] = 'right';
+                    errorIcon.style['line-height'] = '100vh';
                     errorIcon.style.color = '#fcd206';
                     errorIcon.style.fontSize = '25px';
         
-                    errorText.style.width = "65vw";
-                    errorText.style['text-align'] = "left";
+                    errorText.style.width = '65vw';
+                    errorText.style['text-align'] = 'left';
                     errorText.style.color = '#fcd206';
                     errorText.style.fontSize = '25px';
 
                 var interval = setInterval(()=>{
                     try{
-                        var loading = document.getElementById("loading");
-                        var loadingIcon = document.querySelector("#loading i");
-                        var loadingText = document.querySelector("#loading span");
+                        var loading = document.getElementById('loading');
+                        var loadingIcon = document.querySelector('#loading i');
+                        var loadingText = document.querySelector('#loading span');
 
                         loading.style.position = 'fixed';
                         loading.style.left = '0px';
@@ -167,14 +168,14 @@ export class RadioComponent implements OnInit, OnDestroy {
                         loading.style.backgroundPosition = 'center';
                         loading.style.backgroundSize = 'cover';
 
-                        loadingIcon.style.width = "35vw";
-                        loadingIcon.style['text-align'] = "right";
-                        loadingIcon.style['line-height'] = "100vh";
+                        loadingIcon.style.width = '35vw';
+                        loadingIcon.style['text-align'] = 'right';
+                        loadingIcon.style['line-height'] = '100vh';
                         loadingIcon.style.color = '#fcd206';
                         loadingIcon.style.fontSize = '25px';
             
-                        loadingText.style.width = "65vw";
-                        loadingText.style['text-align'] = "left";
+                        loadingText.style.width = '65vw';
+                        loadingText.style['text-align'] = 'left';
                         loadingText.style.color = '#fcd206';
                         loadingText.style.fontSize = '25px';
 
@@ -183,10 +184,9 @@ export class RadioComponent implements OnInit, OnDestroy {
                     }catch(ex){
 
                     }
-            },500);
+            },500);`);
 
-          
-        `);
+        }
 
         setTimeout(() => {
             this.isLoading = false;
